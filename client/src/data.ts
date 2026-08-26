@@ -40,6 +40,7 @@ export interface AuditEntry {
   action: string;
   details: string;
   timestamp: string;
+  targetRole?: Role;
 }
 
 export interface Session {

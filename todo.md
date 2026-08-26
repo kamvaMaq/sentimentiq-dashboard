@@ -39,3 +39,11 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Add an animated administrator-only delete confirmation modal with a warning message.
 - [x] Update and validate the reusable dashboard enhancement skill with preset safety and search patterns.
 - [x] Run type checks, production build, browser verification, and save a new checkpoint.
+
+## Completed revision
+
+- [x] Sync preset search and role filter state with URL query parameters and restore it on load.
+- [x] Record preset create, rename, delete, and restore events with actor and role metadata.
+- [x] Add audit-log filters for action, actor, role, and preset name.
+- [x] Store shared preset versions and expose a restore flow with confirmation.
+- [x] Run URL sharing, audit, restore, TypeScript, production build, and browser verification before checkpointing.
