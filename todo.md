@@ -32,3 +32,10 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Persist and load custom presets across sessions with visible loading/saving states.
 - [x] Restrict shared preset edit and delete actions by role while protecting built-in presets.
 - [x] Run IndexedDB behavior checks, TypeScript, production build, and save a new checkpoint.
+
+## Completed revision
+
+- [x] Add a search field and role filter for shared workspace presets.
+- [x] Add an animated administrator-only delete confirmation modal with a warning message.
+- [x] Update and validate the reusable dashboard enhancement skill with preset safety and search patterns.
+- [x] Run type checks, production build, browser verification, and save a new checkpoint.
