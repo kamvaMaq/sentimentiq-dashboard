@@ -1,0 +1,5 @@
+# Verification notes
+
+The live Profile & Preferences view shows the workspace preset section with an IndexedDB loading path, role labels, and an Admin team / Viewer team target selector. The browser reports an IndexedDB database named `sentimentiq-workspace` at version 1. A temporary custom preset was written to the `layout-presets` object store with `{ role: "admin" }`, rendered with rename/delete controls, and was deleted afterward. Built-in role presets remain protected because edit/delete actions are only rendered for custom records. TypeScript and production builds pass; remaining work is final console/responsive verification and checkpointing.
+
+The final browser checks confirmed the `sentimentiq-workspace` IndexedDB database is present, admin shared preset controls render only for custom presets, and the temporary test preset was removed successfully. Built-in presets remain protected and viewers have no edit/delete actions. The profile UI exposes role targeting for administrator-created presets and indicates apply-only access for viewers.

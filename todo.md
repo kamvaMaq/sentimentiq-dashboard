@@ -25,3 +25,10 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Add a visual placeholder that tracks the mobile widget drop target during long-press dragging.
 - [x] Update the reusable skill with shared role presets and mobile placeholder guidance, then validate it.
 - [x] Run web checks, responsive verification, and save a new checkpoint.
+
+## Completed revision
+
+- [x] Replace shared preset localStorage persistence with an IndexedDB workspace store and a resilient loading fallback.
+- [x] Persist and load custom presets across sessions with visible loading/saving states.
+- [x] Restrict shared preset edit and delete actions by role while protecting built-in presets.
+- [x] Run IndexedDB behavior checks, TypeScript, production build, and save a new checkpoint.
