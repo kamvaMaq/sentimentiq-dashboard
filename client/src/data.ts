@@ -1,6 +1,8 @@
+import { SentimentIntensityAnalyzer } from "vader-sentiment";
+
 export type Sentiment = "positive" | "neutral" | "negative";
 export type Role = "admin" | "viewer";
-export type Page = "dashboard" | "upload" | "reviews" | "reports" | "admin";
+export type Page = "dashboard" | "upload" | "reviews" | "reports" | "admin" | "profile";
 
 export interface Review {
   id: string;
@@ -15,6 +17,11 @@ export interface Review {
   source: string;
   importedAt: string;
   override?: Sentiment;
+  vaderSentiment?: Sentiment;
+  vaderCompound?: number;
+  vaderPositive?: number;
+  vaderNeutral?: number;
+  vaderNegative?: number;
 }
 
 export interface User {
@@ -56,6 +63,8 @@ const POS_WORDS = new Set([
 const NEG_WORDS = new Set([
   "bad", "terrible", "awful", "worst", "horrible", "disappointing", "poor", "broken", "damaged", "late", "slow", "useless", "defective", "waste", "refund", "return", "angry", "frustrated", "never", "fail", "failed", "failure", "ugly", "cheap", "flimsy", "inaccurate", "confusing", "complicated", "rude", "unhelpful", "misleading", "wrong", "missing", "lost", "delayed", "expensive", "overpriced", "unsafe", "dangerous", "defect", "shattered", "scratched", "leaking", "noisy", "uncomfortable", "stiff", "annoyed",
 ]);
+
+const vader = new SentimentIntensityAnalyzer();
 
 const THEME_KEYWORDS: Record<string, string[]> = {
   shipping: ["ship", "deliver", "delivery", "fast", "slow", "package", "tracking", "arrive", "transit", "courier", "postal", "dispatch"],
@@ -102,6 +111,12 @@ export function analyzeSentiment(text: string): { sentiment: Sentiment; confiden
     .filter(([, keywords]) => keywords.some((keyword) => lower.includes(keyword)))
     .map(([theme]) => theme);
   return { sentiment, confidence: Number(confidence.toFixed(2)), themes: themes.length ? themes : ["general"] };
+}
+
+export function analyzeVader(text: string): { vaderSentiment: Sentiment; vaderCompound: number; vaderPositive: number; vaderNeutral: number; vaderNegative: number } {
+  const scores = vader.polarity_scores(text);
+  const vaderSentiment: Sentiment = scores.compound >= 0.05 ? "positive" : scores.compound <= -0.05 ? "negative" : "neutral";
+  return { vaderSentiment, vaderCompound: Number(scores.compound.toFixed(3)), vaderPositive: Number(scores.pos.toFixed(3)), vaderNeutral: Number(scores.neu.toFixed(3)), vaderNegative: Number(scores.neg.toFixed(3)) };
 }
 
 export function applyRatingBias(analysis: { sentiment: Sentiment; confidence: number; themes: string[] }, rating?: number) {
@@ -212,6 +227,8 @@ export interface AggStats {
   byDate: { date: string; positive: number; neutral: number; negative: number }[];
   byDayOfWeek: Record<string, Record<string, number>>;
   keywords: { word: string; count: number; sentiment: Sentiment }[];
+  vaderAgreement: number;
+  vaderSplit: { name: string; value: number; sentiment: Sentiment }[];
 }
 
 export function getEffectiveSentiment(review: Review): Sentiment { return review.override ?? review.sentiment; }
@@ -226,14 +243,19 @@ export function computeStats(reviews: Review[], filters?: Partial<AppFilters>): 
     if (filters.rating && filters.rating !== "all") filtered = filtered.filter((review) => review.rating === Number(filters.rating));
   }
 
-  const stats: AggStats = { total: filtered.length, positive: 0, neutral: 0, negative: 0, avgRating: 0, nps: 0, satisfactionScore: 0, byProduct: {}, byTheme: {}, byDate: [], byDayOfWeek: {}, keywords: [] };
+  const stats: AggStats = { total: filtered.length, positive: 0, neutral: 0, negative: 0, avgRating: 0, nps: 0, satisfactionScore: 0, byProduct: {}, byTheme: {}, byDate: [], byDayOfWeek: {}, keywords: [], vaderAgreement: 0, vaderSplit: [] };
   const dateMap: Record<string, { positive: number; neutral: number; negative: number }> = {};
   const wordMap: Record<string, { count: number; positive: number; negative: number }> = {};
   let ratingTotal = 0;
   let ratingCount = 0;
+  let vaderMatches = 0;
+  const vaderCounts: Record<Sentiment, number> = { positive: 0, neutral: 0, negative: 0 };
 
   for (const review of filtered) {
     const sentiment = getEffectiveSentiment(review);
+    const vaderResult = review.vaderSentiment ? { vaderSentiment: review.vaderSentiment } : analyzeVader(review.text);
+    if (vaderResult.vaderSentiment === sentiment) vaderMatches += 1;
+    vaderCounts[vaderResult.vaderSentiment] += 1;
     stats[sentiment] += 1;
     if (review.rating) { ratingTotal += review.rating; ratingCount += 1; }
     const product = stats.byProduct[review.product] ?? { pos: 0, neu: 0, neg: 0, total: 0 };
@@ -277,6 +299,8 @@ export function computeStats(reviews: Review[], filters?: Partial<AppFilters>): 
   const detractors = filtered.filter((review) => (review.rating ?? 3) <= 2).length;
   stats.nps = stats.total ? Math.round(((promoters - detractors) / stats.total) * 100) : 0;
   stats.satisfactionScore = stats.total ? Math.round((stats.positive * 100 + stats.neutral * 50) / stats.total) : 0;
+  stats.vaderAgreement = stats.total ? Math.round((vaderMatches / stats.total) * 100) : 0;
+  stats.vaderSplit = [{ name: "Positive", value: vaderCounts.positive, sentiment: "positive" }, { name: "Neutral", value: vaderCounts.neutral, sentiment: "neutral" }, { name: "Negative", value: vaderCounts.negative, sentiment: "negative" }];
   return stats;
 }
 

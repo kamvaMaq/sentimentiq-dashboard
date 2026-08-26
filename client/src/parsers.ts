@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { analyzeSentiment, applyRatingBias, type Review } from "./data";
+import { analyzeSentiment, analyzeVader, applyRatingBias, type Review } from "./data";
 
 // ── Common schema ─────────────────────────────────────────────────────────────
 
@@ -59,6 +59,7 @@ function rowToReview(row: Record<string, string>, map: ColumnMap, source: string
     source,
     importedAt: new Date().toISOString(),
     ...analysis,
+    ...analyzeVader(text),
   };
 }
 
