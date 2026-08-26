@@ -18,3 +18,10 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Add mobile long-press drag behavior for dashboard widgets while preserving desktop drag and keyboard arrows.
 - [x] Create a reusable skill capturing this dashboard enhancement workflow, implementation patterns, and validation checklist.
 - [x] Validate the skill and run web project checks before delivery.
+
+## Completed revision
+
+- [x] Move layout presets into a shared workspace-level store keyed by analyst role, with per-user custom overrides preserved.
+- [x] Add a visual placeholder that tracks the mobile widget drop target during long-press dragging.
+- [x] Update the reusable skill with shared role presets and mobile placeholder guidance, then validate it.
+- [x] Run web checks, responsive verification, and save a new checkpoint.
