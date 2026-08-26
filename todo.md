@@ -11,3 +11,10 @@ The requested enhancement pass is complete. Upload parsing now exposes staged pr
 - [x] Run type checks, production build, browser verification, and save a new checkpoint.
 
 TypeScript checking, the production build, browser navigation through dashboard, reviews, upload, profile, and dark-mode states, preference save/restore interaction, and browser-console verification have been completed. The natural-language search is implemented as a privacy-preserving local intent interpreter in the current frontend-only project; a server-side LLM route can be connected later without exposing credentials in the browser.
+
+## Completed revision
+
+- [x] Add role-based saved layout presets with quick apply and save-as-preset actions.
+- [x] Add mobile long-press drag behavior for dashboard widgets while preserving desktop drag and keyboard arrows.
+- [x] Create a reusable skill capturing this dashboard enhancement workflow, implementation patterns, and validation checklist.
+- [x] Validate the skill and run web project checks before delivery.
