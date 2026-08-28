@@ -65,7 +65,7 @@ const NEG_WORDS = new Set([
   "bad", "terrible", "awful", "worst", "horrible", "disappointing", "poor", "broken", "damaged", "late", "slow", "useless", "defective", "waste", "refund", "return", "angry", "frustrated", "never", "fail", "failed", "failure", "ugly", "cheap", "flimsy", "inaccurate", "confusing", "complicated", "rude", "unhelpful", "misleading", "wrong", "missing", "lost", "delayed", "expensive", "overpriced", "unsafe", "dangerous", "defect", "shattered", "scratched", "leaking", "noisy", "uncomfortable", "stiff", "annoyed",
 ]);
 
-const vader = new SentimentIntensityAnalyzer();
+const vader = SentimentIntensityAnalyzer;
 
 const THEME_KEYWORDS: Record<string, string[]> = {
   shipping: ["ship", "deliver", "delivery", "fast", "slow", "package", "tracking", "arrive", "transit", "courier", "postal", "dispatch"],

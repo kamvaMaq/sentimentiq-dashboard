@@ -34,8 +34,14 @@ export interface ImportResult {
 // ── Row → Review ───────────────────────────────────────────────────────────────
 
 function rowToReview(row: Record<string, string>, map: ColumnMap, source: string): Review | null {
-  const text = (row[map.text] ?? "").trim();
-  if (!text || text.length < 5) return null;
+  // Prefer the mapped text column, but fall back to the first non-empty cell so
+  // a valid row is not discarded when a source file has an imperfect mapping.
+  const mappedText = map.text ? String(row[map.text] ?? "").trim() : "";
+  const fallbackText = Object.values(row).find((value) => String(value ?? "").trim().length > 0) ?? "";
+  const text = (mappedText || String(fallbackText)).trim();
+  // Only a genuinely blank record is invalid. Short but non-empty feedback is
+  // still meaningful and must be retained rather than silently skipped.
+  if (!text) return null;
 
   const ratingRaw = map.rating ? parseFloat(row[map.rating] ?? "") : NaN;
   const rating = isNaN(ratingRaw) || ratingRaw < 1 || ratingRaw > 5 ? undefined : Math.round(ratingRaw) as 1|2|3|4|5;
@@ -100,7 +106,7 @@ export async function parseDOCX(file: File): Promise<ParseResult> {
     const lines = text
       .split(/\n{2,}|\r\n{2,}/)
       .map(l => l.replace(/^\d+[\.\)]\s*/, "").trim())
-      .filter(l => l.length > 10);
+      .filter(l => l.length > 0);
 
     if (lines.length === 0) return { rows: [], headers: [], error: "No review text found in document." };
 
@@ -134,7 +140,7 @@ export async function parsePDF(file: File): Promise<ParseResult> {
     const lines = fullText
       .split(/\n{2,}/)
       .map(l => l.replace(/\s+/g, " ").trim())
-      .filter(l => l.length > 15);
+      .filter(l => l.length > 0);
 
     if (lines.length === 0) return { rows: [], headers: [], error: "No review text extracted from PDF." };
 
@@ -166,7 +172,10 @@ export function importRows(rows: Record<string, string>[], map: ColumnMap, sourc
     try {
       const review = rowToReview(rows[i], map, source);
       if (review) imported.push(review);
-      else skipped++;
+      else {
+        skipped++;
+        if (errors.length < 5) errors.push(`Row ${i + 1}: no non-empty review text found.`);
+      }
     } catch (err) {
       skipped++;
       if (errors.length < 5) errors.push(`Row ${i + 1}: ${String(err)}`);
