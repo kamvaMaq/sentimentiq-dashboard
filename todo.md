@@ -47,3 +47,19 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Add audit-log filters for action, actor, role, and preset name.
 - [x] Store shared preset versions and expose a restore flow with confirmation.
 - [x] Run URL sharing, audit, restore, TypeScript, production build, and browser verification before checkpointing.
+
+## Documentation and stakeholder communication
+
+- [ ] Inspect the current source, scripts, project metadata, live domain, and frontend-only deployment boundary.
+- [ ] Write a comprehensive deployment, configuration, security, operations, troubleshooting, and production-hardening guide.
+- [ ] Prepare stakeholder slide content summarizing the master prompt, product scope, architecture, current limitations, and roadmap.
+- [ ] Generate and review the stakeholder slide deck.
+- [ ] Deliver the documentation and presentation files.
+
+## Completed automated testing revision
+
+- [x] Inspect the current Vitest configuration, package scripts, and testable data/UI boundaries.
+- [x] Write a comprehensive test plan covering layout behavior, VADER disagreement logic, persistence, permissions, export, accessibility, and responsive interaction risks.
+- [x] Implement automated unit and integration tests for sentiment disagreement and layout state behavior.
+- [x] Add UI-focused tests or test seams for widget reorder, preset permissions, and disagreement filtering/export.
+- [x] Run tests, TypeScript checks, and production build; fix regressions and record results.

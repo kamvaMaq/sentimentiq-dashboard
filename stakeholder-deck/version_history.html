@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, initial-scale=1.0" />
+<title>Version history makes layout changes reversible</title>
+<style>
+:root{--paper:#f3f1eb;--ink:#1e2a2f;--muted:#687579;--teal:#14a89b;--line:#cbd3cf;--coral:#dc6f62;--mono:"IBM Plex Mono",monospace;--sans:"DM Sans",Arial,sans-serif;--serif:Georgia,serif}
+*{box-sizing:border-box} body{margin:0;background:#dfe5e1;font-family:var(--sans);color:var(--ink)} .slide-container{width:1280px;min-height:720px;background:var(--paper);position:relative;overflow:hidden;padding:0 72px}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}.g1{left:245px}.g2{left:480px}.g3{left:715px}.g4{left:950px}
+.topline{position:absolute;left:72px;right:72px;top:42px;border-top:1px solid var(--line);display:flex;justify-content:space-between;padding-top:12px;font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.content{position:absolute;left:72px;top:128px;width:580px}.eyebrow{font:11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:22px}.content h1{font:700 48px/1.05 var(--serif);letter-spacing:-.04em;margin:0 0 24px}.content p{font-size:19px;line-height:1.45;color:#516064;margin:0 0 40px}
+.history-log{position:absolute;right:72px;top:128px;width:480px;border-top:1px solid var(--ink);padding-top:20px}.log-title{font:11px var(--mono);text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.log-entry{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line)}.log-time{font:11px var(--mono);color:var(--muted)}.log-details strong{display:block;font-size:16px;margin-bottom:4px}.log-details span{display:block;font-size:12px;color:var(--muted);line-height:1.4}
+.restore-note{border-top:2px solid var(--teal);margin-top:32px;padding-top:16px;font-weight:700;font-size:16px;color:var(--ink)}
+.footer{position:absolute;left:72px;right:72px;bottom:42px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;font:10px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="gridline g1"></div><div class="gridline g2"></div><div class="gridline g3"></div><div class="gridline g4"></div>
+<div class="topline"><span>09 / Workspace Persistence</span><span>SentimentIQ</span></div>
+<section class="content">
+<div class="eyebrow">Reversible decisions</div>
+<h1>Version history makes layout changes reversible.</h1>
+<p>Custom shared presets record every change, allowing administrators to audit the timeline and restore previous configurations with one click.</p>
+<div class="restore-note">Restoring creates a new version and a traceable audit event.</div>
+</section>
+<div class="history-log">
+<div class="log-title">Preset Version History</div>
+<div class="log-entry">
+<div class="log-time">Aug 26, 11:45</div>
+<div class="log-details"><strong>Restored from version</strong><span>Restored "QA command center" to July 12 state. · admin@company.com</span></div>
+</div>
+<div class="log-entry">
+<div class="log-time">Aug 24, 09:12</div>
+<div class="log-details"><strong>Renamed shared preset</strong><span>Renamed "Old QA" to "QA command center". · admin@company.com</span></div>
+</div>
+<div class="log-entry">
+<div class="log-time">Aug 22, 14:30</div>
+<div class="log-details"><strong>Created shared preset</strong><span>Initial layout for the Admin team. · admin@company.com</span></div>
+</div>
+</div>
+<div class="footer"><span>Traceable · Reversible · Accountable</span><span>Stakeholder Brief</span></div>
+</div>
+</body>
+</html>

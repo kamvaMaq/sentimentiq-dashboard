@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, initial-scale=1.0" />
+<title>The architecture is intentionally lightweight</title>
+<style>
+:root{--paper:#f3f1eb;--ink:#1e2a2f;--muted:#687579;--teal:#14a89b;--line:#cbd3cf;--coral:#dc6f62;--mono:"IBM Plex Mono",monospace;--sans:"DM Sans",Arial,sans-serif;--serif:Georgia,serif}
+*{box-sizing:border-box} body{margin:0;background:#dfe5e1;font-family:var(--sans);color:var(--ink)} .slide-container{width:1280px;min-height:720px;background:var(--paper);position:relative;overflow:hidden;padding:0 72px}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}.g1{left:245px}.g2{left:480px}.g3{left:715px}.g4{left:950px}
+.topbar{position:absolute;left:72px;right:72px;top:42px;border-top:1px solid var(--line);display:flex;justify-content:space-between;padding-top:12px;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.header{position:absolute;left:72px;top:128px;width:600px}.eyebrow{font:11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:22px}.header h1{font:700 48px/1.05 var(--serif);letter-spacing:-.04em;margin:0}
+.stack{position:absolute;left:72px;top:320px;width:580px;border-top:2px solid var(--teal)}.tech-row{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}.tech-row b{font:11px var(--mono);color:var(--teal);text-transform:uppercase}.tech-row strong{display:block;font-size:18px;margin-bottom:4px}.tech-row span{display:block;font-size:13px;color:var(--muted);line-height:1.4}
+.boundary{position:absolute;right:72px;top:160px;width:380px;padding-top:16px;border-top:1px solid var(--ink)}.boundary h2{font:700 28px/1.1 var(--serif);margin:0 0 16px}.boundary p{font-size:15px;line-height:1.5;color:#516064;margin:0 0 24px}.warning-box{border-top:2px solid var(--coral);padding-top:14px;font-weight:700;font-size:16px;color:var(--ink)}
+.footer{position:absolute;left:72px;right:72px;bottom:42px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;font:10px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="gridline g1"></div><div class="gridline g2"></div><div class="gridline g3"></div><div class="gridline g4"></div>
+<div class="topbar"><span>04 / technical stack</span><span>SentimentIQ Architecture</span></div>
+<div class="header"><div class="eyebrow">Frontend-first delivery</div><h1>The architecture is intentionally lightweight.</h1></div>
+<div class="stack">
+<div class="tech-row"><b>Shell</b><div><strong>React 19 + Vite</strong><span>Modern application core and production-ready build pipeline.</span></div></div>
+<div class="tech-row"><b>Interface</b><div><strong>Tailwind 4 + Wouter</strong><span>Responsive utility styling and lightweight client-side routing.</span></div></div>
+<div class="tech-row"><b>Analytics</b><div><strong>Recharts + VADER</strong><span>Declarative data visualization and lexicon-based sentiment comparison.</span></div></div>
+<div class="tech-row"><b>Ingestion</b><div><strong>Papa Parse + PDF.js</strong><span>Browser-side extraction for CSV, DOCX, and PDF documents.</span></div></div>
+</div>
+<div class="boundary"><h2>Current scope: Frontend-only</h2><p>The application operates entirely in the browser. Identity, reviews, and presets are stored in localStorage and IndexedDB.</p><div class="warning-box">No authoritative server database or application API is currently active.</div></div>
+<div class="footer"><span>Pilot-ready architecture</span><span>August 2026</span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+{
+  "project_info": {
+    "title": "SentimentIQ",
+    "created": 1787909878.758,
+    "last_updated": 1787909995.102,
+    "total_slides": 12
+  },
+  "slides": [
+    {
+      "id": "cover",
+      "state": "edited",
+      "pageNum": 1
+    },
+    {
+      "id": "operating_signal",
+      "state": "edited",
+      "pageNum": 2
+    },
+    {
+      "id": "evidence_gap",
+      "state": "edited",
+      "pageNum": 3
+    },
+    {
+      "id": "four_surfaces",
+      "state": "edited",
+      "pageNum": 4
+    },
+    {
+      "id": "lightweight_architecture",
+      "state": "edited",
+      "pageNum": 5
+    },
+    {
+      "id": "two_signals",
+      "state": "edited",
+      "pageNum": 6
+    },
+    {
+      "id": "analyst_control",
+      "state": "edited",
+      "pageNum": 7
+    },
+    {
+      "id": "governance",
+      "state": "edited",
+      "pageNum": 8
+    },
+    {
+      "id": "shared_views",
+      "state": "edited",
+      "pageNum": 9
+    },
+    {
+      "id": "version_history",
+      "state": "edited",
+      "pageNum": 10
+    },
+    {
+      "id": "deployment",
+      "state": "edited",
+      "pageNum": 11
+    },
+    {
+      "id": "production_path",
+      "state": "edited",
+      "pageNum": 12
+    }
+  ],
+  "outline": [
+    {
+      "id": "cover",
+      "title": "SentimentIQ",
+      "summary": "Customer signal, without the fog. Stakeholder architecture and deployment brief, August 2026.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "operating_signal",
+      "title": "Turn feedback into an operating signal",
+      "summary": "SentimentIQ converts imported customer reviews into a calm, traceable workspace for product, support, and QA teams.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "evidence_gap",
+      "title": "The product closes the evidence gap",
+      "summary": "Show how the product connects aggregate signal to review-level evidence, source context, confidence, and model labels.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "four_surfaces",
+      "title": "One workspace, four operating surfaces",
+      "summary": "Dashboard, Upload Data, Reviews Explorer, and Governance provide the core workflow.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "lightweight_architecture",
+      "title": "The architecture is intentionally lightweight",
+      "summary": "React/Vite frontend architecture, client-side routing, visualization, parsing libraries, and current frontend-only boundary.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "two_signals",
+      "title": "A review gains two independent signals",
+      "summary": "Compare the primary keyword/rating-aware classifier with VADER and use disagreement as a QA workflow.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "analyst_control",
+      "title": "The workspace is built for analyst control",
+      "summary": "Desktop drag-and-drop, mobile long press, keyboard controls, role presets, and separate personal preferences.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "governance",
+      "title": "Governance is visible in the interface",
+      "summary": "Role permissions, protected built-ins, destructive delete confirmation, and traceable audit events.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "shared_views",
+      "title": "Shared views are easy to pass around",
+      "summary": "URL-synchronized preset filters and IndexedDB workspace storage, with clear authorization boundaries.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "version_history",
+      "title": "Version history makes layout changes reversible",
+      "summary": "Timestamped versions, administrator restore, preserved history, and restore audit events.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "deployment",
+      "title": "Deployment is ready for demos and pilot use",
+      "summary": "Release commands, Manus hosting, live domain, and verification checklist.",
+      "image_plan": "Use a suitable image if needed"
+    },
+    {
+      "id": "production_path",
+      "title": "Production readiness requires a server boundary",
+      "summary": "Current browser-local limitations and recommended path from pilot to secure multi-user product.",
+      "image_plan": "Use a suitable image if needed"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, initial-scale=1.0" />
+<title>Production readiness requires a server boundary</title>
+<style>
+:root{--paper:#f3f1eb;--ink:#1e2a2f;--muted:#687579;--teal:#14a89b;--line:#cbd3cf;--coral:#dc6f62;--mono:"IBM Plex Mono",monospace;--sans:"DM Sans",Arial,sans-serif;--serif:Georgia,serif}
+*{box-sizing:border-box} body{margin:0;background:#dfe5e1;font-family:var(--sans);color:var(--ink)} .slide-container{width:1280px;min-height:720px;background:var(--paper);position:relative;overflow:hidden;padding:0 72px}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}.g1{left:245px}.g2{left:480px}.g3{left:715px}.g4{left:950px}
+.topline{position:absolute;left:72px;right:72px;top:42px;border-top:1px solid var(--line);display:flex;justify-content:space-between;padding-top:12px;font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.content{position:absolute;left:72px;top:128px;width:580px}.eyebrow{font:11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--coral);margin-bottom:22px}.content h1{font:700 48px/1.05 var(--serif);letter-spacing:-.04em;margin:0 0 24px}.content p{font-size:19px;line-height:1.45;color:#516064;margin:0}
+.matrix{position:absolute;right:72px;top:128px;width:480px;border-top:1px solid var(--ink)}.matrix-row{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}.matrix-label{font:700 11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}.matrix-item strong{display:block;font-size:17px;margin-bottom:8px}.matrix-item span{display:block;font-size:13px;line-height:1.4;color:var(--muted)}
+.roadmap{position:absolute;left:72px;bottom:84px;width:580px;padding-top:16px;border-top:2px solid var(--teal);display:flex;gap:20px}.roadmap i{color:var(--teal);font-size:18px;margin-top:2px}.roadmap div strong{display:block;font-size:16px;margin-bottom:4px}.roadmap div p{font-size:13px;color:var(--muted);margin:0}
+.footer{position:absolute;left:72px;right:72px;bottom:42px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;font:10px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="gridline g1"></div><div class="gridline g2"></div><div class="gridline g3"></div><div class="gridline g4"></div>
+<div class="topline"><span>12 / Production Roadmap</span><span>SentimentIQ</span></div>
+<section class="content">
+<div class="eyebrow">Pilot to Product</div>
+<h1>Production readiness requires a server boundary.</h1>
+<p>The current browser-local architecture is optimized for pilot workflows and UX validation. Scaling to multi-user production requires a secure backend authority.</p>
+</section>
+<div class="matrix">
+<div class="matrix-row">
+<div class="matrix-label">Limitation</div>
+<div class="matrix-item">
+<strong>Browser-local storage</strong>
+<span>Data is isolated to the browser profile and origin; clearing site data or changing devices results in data loss.</span>
+</div>
+</div>
+<div class="matrix-row">
+<div class="matrix-label">Limitation</div>
+<div class="matrix-item">
+<strong>Client-side auth</strong>
+<span>Identity and role checks are enforced in the UI, not by a secure server-side authorization boundary.</span>
+</div>
+</div>
+<div class="matrix-row">
+<div class="matrix-label">Limitation</div>
+<div class="matrix-item">
+<strong>Local Ingestion</strong>
+<span>Large file parsing is limited by browser memory and lacks server-side malware scanning or validation.</span>
+</div>
+</div>
+</div>
+<div class="roadmap">
+<i class="fas fa-arrow-right"></i>
+<div>
+<strong>The path forward</strong>
+<p>Success means migrating to a backend workspace model with managed identity, server-side review storage, and append-only audit logs while preserving the current polished UI.</p>
+</div>
+</div>
+<div class="footer"><span>Pilot Assessment · August 2026</span><span>Precise · Calm · Actionable</span></div>
+</div>
+</body>
+</html>

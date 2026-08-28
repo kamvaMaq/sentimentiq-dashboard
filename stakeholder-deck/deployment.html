@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280, initial-scale=1.0" />
+<title>Deployment is ready for demos and pilot use</title>
+<style>
+:root{--paper:#f3f1eb;--ink:#1e2a2f;--muted:#687579;--teal:#14a89b;--line:#cbd3cf;--coral:#dc6f62;--mono:"IBM Plex Mono",monospace;--sans:"DM Sans",Arial,sans-serif;--serif:Georgia,serif}
+*{box-sizing:border-box} body{margin:0;background:#dfe5e1;font-family:var(--sans);color:var(--ink)} .slide-container{width:1280px;min-height:720px;background:var(--paper);position:relative;overflow:hidden;padding:0 72px}
+.gridline{position:absolute;top:0;bottom:0;width:1px;background:var(--line);opacity:.55}.g1{left:245px}.g2{left:480px}.g3{left:715px}.g4{left:950px}
+.topbar{position:absolute;left:72px;right:72px;top:42px;border-top:1px solid var(--line);display:flex;justify-content:space-between;padding-top:12px;font:10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.header{position:absolute;left:72px;top:128px;width:600px}.eyebrow{font:11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:22px}.header h1{font:700 48px/1.05 var(--serif);letter-spacing:-.04em;margin:0}
+.build-process{position:absolute;left:72px;top:320px;width:500px;border-top:2px solid var(--teal);padding-top:20px}
+.command-box{background:#fff;border:1px solid var(--line);padding:20px;margin-bottom:24px;font:13px var(--mono);color:var(--ink);line-height:1.6}
+.command-box b{color:var(--teal)}
+.hosting-info{font-size:15px;line-height:1.5;color:var(--muted)}
+.hosting-info strong{color:var(--ink);display:block;margin-bottom:4px}
+.checklist{position:absolute;right:72px;top:128px;width:440px;border-top:1px solid var(--ink);padding-top:20px}
+.checklist-title{font:11px var(--mono);text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.check-item{display:grid;grid-template-columns:24px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.check-item i{color:var(--teal);font-size:14px;margin-top:2px}
+.check-item strong{display:block;font-size:15px;margin-bottom:4px}
+.check-item span{display:block;font-size:12px;color:var(--muted);line-height:1.4}
+.footer{position:absolute;left:72px;right:72px;bottom:42px;border-top:1px solid var(--line);padding-top:12px;display:flex;justify-content:space-between;font:10px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div class="slide-container">
+<div class="gridline g1"></div><div class="gridline g2"></div><div class="gridline g3"></div><div class="gridline g4"></div>
+<div class="topbar"><span>10 / Deployment & Release</span><span>SentimentIQ</span></div>
+<div class="header"><div class="eyebrow">Pilot-ready delivery</div><h1>Deployment is ready for demos and pilot use.</h1></div>
+<div class="build-process">
+<div class="command-box">
+pnpm install --frozen-lockfile<br>
+pnpm run check<br>
+<b>pnpm run build</b>
+</div>
+<div class="hosting-info">
+<strong>Manus Built-in Hosting</strong>
+<span>The current public domain is active at:<br>sentimentiq-vlydrwan.manus.space</span>
+</div>
+</div>
+<div class="checklist">
+<div class="checklist-title">Release Verification</div>
+<div class="check-item"><i class="fas fa-check-circle"></i><div><strong>Authentication</strong><span>Admin and Viewer local access flows verified.</span></div></div>
+<div class="check-item"><i class="fas fa-check-circle"></i><div><strong>Data Ingestion</strong><span>CSV, DOCX, and PDF parsing with mapping validated.</span></div></div>
+<div class="check-item"><i class="fas fa-check-circle"></i><div><strong>Governance</strong><span>Role permissions and audit filtering confirmed.</span></div></div>
+<div class="check-item"><i class="fas fa-check-circle"></i><div><strong>Persistence</strong><span>IndexedDB version history and restore tested.</span></div></div>
+</div>
+<div class="footer"><span>Release v1.0.0</span><span>August 2026</span></div>
+</div>
+</body>
+</html>
