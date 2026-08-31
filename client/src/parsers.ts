@@ -117,6 +117,48 @@ export async function parseDOCX(file: File): Promise<ParseResult> {
   }
 }
 
+// ── TXT ───────────────────────────────────────────────────────────────────────
+
+export async function parseTXT(file: File): Promise<ParseResult> {
+  try {
+    const text = await file.text();
+    if (!text.trim()) return { rows: [], headers: [], error: "Text file is empty." };
+    const rows = text
+      .split(/\r?\n{1,}/)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((review_text) => ({ review_text }));
+    return rows.length ? { rows, headers: ["review_text"] } : { rows: [], headers: [], error: "No review text found in text file." };
+  } catch (err) {
+    return { rows: [], headers: [], error: "Failed to parse text file: " + String(err) };
+  }
+}
+
+// ── JSON ──────────────────────────────────────────────────────────────────────
+
+export async function parseJSON(file: File): Promise<ParseResult> {
+  try {
+    const raw = await file.text();
+    if (!raw.trim()) return { rows: [], headers: [], error: "JSON file is empty." };
+    const parsed: unknown = JSON.parse(raw);
+    const sourceRows = Array.isArray(parsed) ? parsed : (parsed && typeof parsed === "object" && Array.isArray((parsed as { reviews?: unknown[] }).reviews) ? (parsed as { reviews: unknown[] }).reviews : [parsed]);
+    const rows = sourceRows.flatMap((item) => {
+      if (typeof item === "string") return item.trim() ? [{ review_text: item.trim() }] : [];
+      if (!item || typeof item !== "object") return [];
+      const record = item as Record<string, unknown>;
+      const normalized: Record<string, string> = {};
+      Object.entries(record).forEach(([key, value]) => {
+        if (value !== null && value !== undefined && (typeof value === "string" || typeof value === "number" || typeof value === "boolean")) normalized[key] = String(value);
+      });
+      return Object.values(normalized).some((value) => value.trim()) ? [normalized] : [];
+    });
+    const headers = Array.from(new Set(rows.flatMap((row) => Object.keys(row))));
+    return rows.length ? { rows, headers } : { rows: [], headers: [], error: "No review records found in JSON file." };
+  } catch (err) {
+    return { rows: [], headers: [], error: "Failed to parse JSON: " + String(err) };
+  }
+}
+
 // ── PDF ───────────────────────────────────────────────────────────────────────
 
 export async function parsePDF(file: File): Promise<ParseResult> {
@@ -158,7 +200,9 @@ export async function parseFile(file: File): Promise<ParseResult> {
   if (name.endsWith(".csv")) return parseCSV(file);
   if (name.endsWith(".docx")) return parseDOCX(file);
   if (name.endsWith(".pdf")) return parsePDF(file);
-  return { rows: [], headers: [], error: `Unsupported file type. Please upload CSV, DOCX, or PDF.` };
+  if (name.endsWith(".txt")) return parseTXT(file);
+  if (name.endsWith(".json")) return parseJSON(file);
+  return { rows: [], headers: [], error: `Unsupported file type. Please upload CSV, DOCX, PDF, TXT, or JSON.` };
 }
 
 // ── Import with column map ────────────────────────────────────────────────────

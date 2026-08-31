@@ -2,7 +2,7 @@ import { SentimentIntensityAnalyzer } from "vader-sentiment";
 
 export type Sentiment = "positive" | "neutral" | "negative";
 export type Role = "admin" | "viewer";
-export type Page = "dashboard" | "upload" | "reviews" | "reports" | "admin" | "profile";
+export type Page = "dashboard" | "upload" | "reviews" | "reports" | "products" | "insights" | "admin" | "profile";
 
 export interface Review {
   id: string;

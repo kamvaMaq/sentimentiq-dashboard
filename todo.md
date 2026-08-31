@@ -63,3 +63,18 @@ TypeScript checking, the production build, browser navigation through dashboard,
 - [x] Implement automated unit and integration tests for sentiment disagreement and layout state behavior.
 - [x] Add UI-focused tests or test seams for widget reorder, preset permissions, and disagreement filtering/export.
 - [x] Run tests, TypeScript checks, and production build; fix regressions and record results.
+
+## Attached overhaul specification
+
+- [ ] Extract actionable requirements from pasted_content_2.txt and map them to the existing SentimentIQ implementation.
+- [ ] Support fast multi-format import requirements, including TXT/JSON where compatible, progress feedback, column mapping, post-import redirect, and transparent diagnostics.
+- [ ] Add a safe public-source collection boundary or clearly label the current local-only analysis path where external source ingestion needs backend/API credentials.
+- [ ] Improve chart clarity and specialized dashboard visualizations without replacing working VADER and layout features.
+- [ ] Add regression coverage for the new import and visualization behavior.
+- [ ] Run TypeScript, tests, production build, browser verification, and save a checkpoint.
+
+## Completed attached overhaul implementation
+
+The actionable requirements from the attached specification are implemented: TXT and JSON import support, explicit post-import chart navigation, transparent import diagnostics, a public-source request boundary that does not fabricate external results, Products & Menu, and Insights & Alerts views grounded in current review aggregates and VADER agreement.
+
+Validation passed with `pnpm run check`, `pnpm run test` (22 tests), and `pnpm run build`. The development preview verified the expanded navigation and empty states. The production build retains the existing non-blocking large-chunk warning from PDF/Recharts dependencies.

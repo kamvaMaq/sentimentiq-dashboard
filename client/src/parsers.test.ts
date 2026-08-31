@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { autoDetectColumns, importRows, type ColumnMap } from "./parsers";
+import { autoDetectColumns, importRows, parseJSON, parseTXT, type ColumnMap } from "./parsers";
 
 const map: ColumnMap = {
   text: "review",
@@ -35,6 +35,26 @@ describe("importRows", () => {
     expect(result.imported).toHaveLength(1);
     expect(result.imported[0]?.text).toBe("Keep me");
     expect(result.imported[0]?.rating).toBeUndefined();
+  });
+});
+
+describe("text and JSON parsing", () => {
+  it("parses one non-empty review per TXT line without dropping short text", async () => {
+    const result = await parseTXT(new File(["Good\nOK\n\nNeeds work"], "reviews.txt", { type: "text/plain" }));
+    expect(result.rows).toEqual([{ review_text: "Good" }, { review_text: "OK" }, { review_text: "Needs work" }]);
+    expect(result.headers).toEqual(["review_text"]);
+  });
+
+  it("parses JSON arrays and nested reviews into string records", async () => {
+    const result = await parseJSON(new File([JSON.stringify({ reviews: [{ text: "Excellent", rating: 5 }, "Needs work", null] })], "reviews.json", { type: "application/json" }));
+    expect(result.rows).toEqual([{ text: "Excellent", rating: "5" }, { review_text: "Needs work" }]);
+    expect(result.headers).toEqual(["text", "rating", "review_text"]);
+  });
+
+  it("returns a useful error for empty JSON content", async () => {
+    const result = await parseJSON(new File(["[]"], "empty.json", { type: "application/json" }));
+    expect(result.rows).toEqual([]);
+    expect(result.error).toBe("No review records found in JSON file.");
   });
 });
 
